@@ -1,0 +1,7 @@
+data/*
+!data/.htaccess
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+config.local.php
+.DS_Store

@@ -1,0 +1,21 @@
+# Séjours La Croze — règles de sécurité Apache (hébergement mutualisé)
+Options -Indexes
+AddDefaultCharset UTF-8
+
+# Bloquer l'accès direct aux fichiers de base de données
+<FilesMatch "\.(sqlite|sqlite-wal|sqlite-shm|db)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Forcer HTTPS si disponible (décommentez si votre hébergeur le gère par .htaccess)
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# </IfModule>
